@@ -340,6 +340,40 @@ Simply run:
 python tools/demo_track.py video -f exps/example/mot/yolox_x_mix_det.py -c pretrained/bytetrack_x_mot17.pth.tar --fp16 --fuse --save_result
 ```
 
+## Ultralytics YOLO Integration (full pipeline)
+
+If your detector stack is based on Ultralytics YOLO (for example YOLOv8/YOLO11/YOLO26 style workflows),
+you can run end-to-end tracking with FastTracker using:
+
+```bash
+python tools/ultralytics_fasttracker.py \
+  --source path/to/video.mp4 \
+  --model path/to/yolo_weights.pt \
+  --config configs/004_default.json \
+  --device 0 \
+  --save-video runs/ultralytics_fasttracker/out.mp4 \
+  --save-mot runs/ultralytics_fasttracker/track_results.txt
+```
+
+Notes:
+
+* Install Ultralytics first: `pip install ultralytics`.
+* Use `--class-aware` to switch to class-aware motion prediction (`fasttracker_cls.py`).
+* Use `--classes` to track only specific detector classes.
+* The script writes both an annotated video and a MOT-format `.txt` file.
+
+### Example Python Program
+
+If you prefer embedding the integration in your own codebase, use:
+
+```bash
+python examples/ultralytics_fasttracker_example.py
+```
+
+This example runs detector → tracker on `input.mp4` and writes:
+* `tracked_output.mp4`
+* `track_results.txt`
+
 ## Citation
 If you use our code or Benchmark, please cite our work.
 
