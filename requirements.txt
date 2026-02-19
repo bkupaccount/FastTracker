@@ -18,6 +18,8 @@ filterpy
 h5py
 requests
 matplotlib
+# optional integration
+# ultralytics
 
 
 
